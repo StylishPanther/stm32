@@ -15,6 +15,7 @@
   *
   ******************************************************************************
   */
+#define __MAIN__
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -103,7 +104,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	test = 0;
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -217,7 +218,7 @@ static void MX_UART4_Init(void)
 {
 
   /* USER CODE BEGIN UART4_Init 0 */
-
+  __HAL_RCC_UART4_CLK_ENABLE();
   /* USER CODE END UART4_Init 0 */
 
   /* USER CODE BEGIN UART4_Init 1 */
@@ -236,7 +237,7 @@ static void MX_UART4_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN UART4_Init 2 */
-
+  
   /* USER CODE END UART4_Init 2 */
 
 }

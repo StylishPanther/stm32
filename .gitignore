@@ -1,6 +1,3 @@
-
-
-
 *.IAB
 *.IAD
 *.IMB
@@ -13,11 +10,8 @@
 *.SearchResults
 *.WK3
 
-build\
+build/
+.vscode/
 
-
-
-.vscode\
-
-
+stm32_documents/
 

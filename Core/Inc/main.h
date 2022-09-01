@@ -99,8 +99,6 @@ void Error_Handler(void);
 #define Left_Encoder_B_GPIO_Port GPIOE
 #define SW_U_Pin GPIO_PIN_12
 #define SW_U_GPIO_Port GPIOE
-#define SW_D_Pin GPIO_PIN_13
-#define SW_D_GPIO_Port GPIOE
 #define SW_L_Pin GPIO_PIN_14
 #define SW_L_GPIO_Port GPIOE
 #define SW_R_Pin GPIO_PIN_15

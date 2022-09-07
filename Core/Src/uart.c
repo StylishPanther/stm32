@@ -39,10 +39,8 @@ void TxPrintf(const char *Form, ... )
 static void UART4_SendData(const char data)
 {
   /* Transmit Data */ 
-  
 	while(!(UART4->SR & UART_FLAG_TC) );
-	UART4->DR = (data & (uint16_t)0x01FF);
-	
+	UART4->DR = (data & (uint16_t)0x01FF);	
 }
 
 static void UART4_SendString(char *str) // ???? ???? ??

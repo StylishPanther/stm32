@@ -491,7 +491,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_4|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_10
-                          |GPIO_PIN_13|SEN_8_16_Pin|GPIO_PIN_1, GPIO_PIN_RESET);
+                          |SW_D_Pin|SEN_8_16_Pin|GPIO_PIN_1, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13|GPIO_PIN_8|GPIO_PIN_12, GPIO_PIN_RESET);
@@ -499,16 +499,16 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, SEN_0_8_Pin|SEN_1_9_Pin|SEN_2_10_Pin|SEN_3_11_Pin
                           |SEN_4_12_Pin|SEN_5_13_Pin|SEN_6_14_Pin|SEN_7_15_Pin
-                          |GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
+                          |VFD_DATA_Pin|VFD_RS_Pin|VFD_CE_Pin|VFD_CLK_Pin
                           |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11|GPIO_PIN_12, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PE4 PE7 PE8 PE10
-                           PE13 SEN_8_16_Pin PE1 */
+                           SW_D_Pin SEN_8_16_Pin PE1 */
   GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_10
-                          |GPIO_PIN_13|SEN_8_16_Pin|GPIO_PIN_1;
+                          |SW_D_Pin|SEN_8_16_Pin|GPIO_PIN_1;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -545,11 +545,11 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : SEN_0_8_Pin SEN_1_9_Pin SEN_2_10_Pin SEN_3_11_Pin
                            SEN_4_12_Pin SEN_5_13_Pin SEN_6_14_Pin SEN_7_15_Pin
-                           PD0 PD1 PD2 PD3
+                           VFD_DATA_Pin VFD_RS_Pin VFD_CE_Pin VFD_CLK_Pin
                            PD4 PD5 PD6 PD7 */
   GPIO_InitStruct.Pin = SEN_0_8_Pin|SEN_1_9_Pin|SEN_2_10_Pin|SEN_3_11_Pin
                           |SEN_4_12_Pin|SEN_5_13_Pin|SEN_6_14_Pin|SEN_7_15_Pin
-                          |GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
+                          |VFD_DATA_Pin|VFD_RS_Pin|VFD_CE_Pin|VFD_CLK_Pin
                           |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;

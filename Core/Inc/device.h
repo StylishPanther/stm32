@@ -40,7 +40,7 @@ typedef long double     float64;
 //#include "rcc.h"
 //#include "spi.h"
 #include "vfd.h"
-
+#include "sensor.h"
 //HAL Library 
 #include "stm32f4xx_hal.h"
 

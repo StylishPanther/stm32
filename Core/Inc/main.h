@@ -27,7 +27,7 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx_hal.h"
+//#include "stm32f4xx_hal.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -99,6 +99,8 @@ void Error_Handler(void);
 #define Left_Encoder_B_GPIO_Port GPIOE
 #define SW_U_Pin GPIO_PIN_12
 #define SW_U_GPIO_Port GPIOE
+#define SW_D_Pin GPIO_PIN_13
+#define SW_D_GPIO_Port GPIOE
 #define SW_L_Pin GPIO_PIN_14
 #define SW_L_GPIO_Port GPIOE
 #define SW_R_Pin GPIO_PIN_15
@@ -123,6 +125,14 @@ void Error_Handler(void);
 #define Right_Encoder_A_GPIO_Port GPIOC
 #define Right_Encoder_B_Pin GPIO_PIN_7
 #define Right_Encoder_B_GPIO_Port GPIOC
+#define VFD_DATA_Pin GPIO_PIN_0
+#define VFD_DATA_GPIO_Port GPIOD
+#define VFD_RS_Pin GPIO_PIN_1
+#define VFD_RS_GPIO_Port GPIOD
+#define VFD_CE_Pin GPIO_PIN_2
+#define VFD_CE_GPIO_Port GPIOD
+#define VFD_CLK_Pin GPIO_PIN_3
+#define VFD_CLK_GPIO_Port GPIOD
 #define Left_Motor_Pin GPIO_PIN_4
 #define Left_Motor_GPIO_Port GPIOB
 #define Right_Motor_Pin GPIO_PIN_5

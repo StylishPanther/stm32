@@ -1,8 +1,8 @@
 //###########################################################################
 //
-// FILE		: variable.h
+// FILE		: vfd.h
 //
-// TITLE	: variable.h file.
+// TITLE	: vfd.h file.
 //
 // Author	: Lee Jin Ho
 //
@@ -13,21 +13,13 @@
 //###########################################################################
 
 
-#ifdef __MAIN__
-	#ifndef __VARIABLE_EXT__
-		#define __VARIABLE_EXT__
-	#endif
-#else
-	#ifndef __VARIABLE_EXT__
-		#define __VARIABLE_EXT__	extern
-	#endif
-#endif	
+#ifndef __VFD_H
+#define __VFD_H
 
-	
+extern void VfdCtlRegInit(Uint16 CrlReg);
+extern void VfdInit(void);
+extern void VfdDataLoad(char *Buff);
+extern void VFDPrintf(char *Form, ... );
 
-		
-#define PRINT Txprintf("Flow\n");
-		
-__VARIABLE_EXT__ int32 test;
+#endif
 
-		

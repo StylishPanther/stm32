@@ -1,8 +1,8 @@
 //###########################################################################
 //
-// FILE		: variable.h
+// FILE		: sensor.h
 //
-// TITLE	: variable.h file.
+// TITLE	: sensor.h file.
 //
 // Author	: Lee Jin Ho
 //
@@ -13,21 +13,10 @@
 //###########################################################################
 
 
-#ifdef __MAIN__
-	#ifndef __VARIABLE_EXT__
-		#define __VARIABLE_EXT__
-	#endif
-#else
-	#ifndef __VARIABLE_EXT__
-		#define __VARIABLE_EXT__	extern
-	#endif
-#endif	
+#ifndef __SENSOR_H
+#define __SENSOR_H
 
-	
+//extern void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 
-		
-#define PRINT Txprintf("Flow\n");
-		
-__VARIABLE_EXT__ int32 test;
+#endif
 
-		

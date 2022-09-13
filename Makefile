@@ -39,6 +39,7 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
+Core/Src/sensor.c \
 Core/Src/vfd.c \
 Core/Src/menu.c \
 Core/Src/uart.c \

@@ -16,7 +16,7 @@
 #ifndef __SENSOR_H
 #define __SENSOR_H
 
-extern void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+//extern void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 
 #endif
 

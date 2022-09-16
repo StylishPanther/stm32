@@ -19,7 +19,6 @@
 extern void PrintMenu(void);
 extern void System_Information(void);
 
-//
-
+extern void menu(void);
 
 #endif

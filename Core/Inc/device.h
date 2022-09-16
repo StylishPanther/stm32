@@ -1,6 +1,9 @@
 #ifndef __DEVICE_H
 #define __DEVICE_H
 
+//#include "stm32f4xx_hal.h"
+
+
 #ifndef STM32F4xx_DATA_TYPES
 #define STM32F4xx_DATA_TYPES
 
@@ -41,6 +44,7 @@ typedef long double     float64;
 //#include "spi.h"
 #include "vfd.h"
 #include "sensor.h"
+#include "main.h"
 //HAL Library 
 #include "stm32f4xx_hal.h"
 

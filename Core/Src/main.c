@@ -18,7 +18,7 @@
 #define __MAIN__
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "device.h"
 //#include "device.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -117,8 +117,10 @@ int main(void)
   while (1)
   {
   	test = 0;
+	HAL_Delay(1);
+	
     /* USER CODE END WHILE */
-
+	
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

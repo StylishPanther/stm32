@@ -1,8 +1,8 @@
 //###########################################################################
 //
-// FILE		: menu.h
+// FILE		: test.h
 //
-// TITLE	: menu.h file.
+// TITLE	: test.h file.
 //
 // Author	: Lee Jin Ho
 //
@@ -13,12 +13,8 @@
 //###########################################################################
 
 
-#ifndef __MENU_H
-#define __MENU_H
-
-extern void PrintMenu(void);
-extern void System_Information(void);
-
-extern void menu(void);
+#ifndef __TEST_H
+#define __TEST_H
 
 #endif
+

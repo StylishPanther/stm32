@@ -19,7 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-//#include "device.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -117,6 +117,8 @@ int main(void)
   while (1)
   {
   	test = 0;
+	HAL_Delay(1);
+	
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -491,7 +493,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_4|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_10
-                          |SW_D_Pin|SEN_8_16_Pin|GPIO_PIN_1, GPIO_PIN_RESET);
+                          |SEN_8_16_Pin|GPIO_PIN_1, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13|GPIO_PIN_8|GPIO_PIN_12, GPIO_PIN_RESET);
@@ -506,9 +508,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11|GPIO_PIN_12, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PE4 PE7 PE8 PE10
-                           SW_D_Pin SEN_8_16_Pin PE1 */
+                           SEN_8_16_Pin PE1 */
   GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_10
-                          |SW_D_Pin|SEN_8_16_Pin|GPIO_PIN_1;
+                          |SEN_8_16_Pin|GPIO_PIN_1;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -521,10 +523,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SW_U_Pin SW_L_Pin SW_R_Pin */
-  GPIO_InitStruct.Pin = SW_U_Pin|SW_L_Pin|SW_R_Pin;
+  /*Configure GPIO pins : SW_U_Pin SW_D_Pin SW_L_Pin SW_R_Pin */
+  GPIO_InitStruct.Pin = SW_U_Pin|SW_D_Pin|SW_L_Pin|SW_R_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB10 PB11 */

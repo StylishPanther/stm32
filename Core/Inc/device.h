@@ -45,6 +45,7 @@ typedef long double     float64;
 #include "vfd.h"
 #include "sensor.h"
 #include "main.h"
+#include "test.h"
 //HAL Library 
 #include "stm32f4xx_hal.h"
 

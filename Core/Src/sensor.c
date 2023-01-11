@@ -69,6 +69,7 @@ volatile Uint16 sen_shoot_arr[ SEN_END ] =
 	SEN0, SEN1, SEN2, SEN3, SEN4, SEN5, SEN6, SEN7
 };
 
+/*
 volatile Uint16 sen_adc_seq[ADC_NUM][POS]
 {
 	{ADC_SET_SQR1(ADC_1), ADC_SET_SQR2(ADC_1), ADC_SET_SQR3(ADC_1)} ,
@@ -85,7 +86,7 @@ volatile Uint16 sen_adc_seq[ADC_NUM][POS]
 	{ADC_SET_SQR1(ADC_1), ADC_SET_SQR2(ADC_1), ADC_SET_SQR3(ADC_1)} ,
 	
 };
-
+*/
 
 extern ADC_HandleTypeDef hadc1;
 /*
@@ -118,7 +119,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		//It should be executed after MX_ADC_INIT()
 		//GPIO ON and adc start sequence start implement
 		GPIOD->BSRR = ( ON_L << sen_shoot_arr[ g_int32_sen_cnt ] );
-		
+	
 	#if 0
 		//ADC_SQR1(ADC_NUM)
 		ADC1->Instance->SQR1 = 
@@ -128,6 +129,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	#endif
 		// adc start
 		
+	}
+}
+
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+{
+	if(hadc->Instance == ADC1)
+	{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15,GPIO_PIN_RESET);
 	}
 }
 

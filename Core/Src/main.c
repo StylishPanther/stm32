@@ -117,8 +117,10 @@ int main(void)
   while (1)
   {
   	test = 0;
-	HAL_Delay(1);
-	
+    HAL_ADC_Start_IT(&hadc1);
+	System_Information();
+	HAL_Delay(1000);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15,GPIO_PIN_SET);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -621,6 +623,9 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11|GPIO_PIN_12, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET);
+
   /*Configure GPIO pins : PE4 PE7 PE8 PE10
                            SEN_8_16_Pin PE1 */
   GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_10
@@ -688,8 +693,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Alternate = GPIO_AF0_MCO;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA11 PA12 */
-  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
+  /*Configure GPIO pins : PA11 PA12 PA15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -725,6 +730,8 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
+
+  
   __disable_irq();
   while (1)
   {

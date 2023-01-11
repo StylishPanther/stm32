@@ -4,12 +4,12 @@
 static void UART4_SendData(const char data);
 static void UART4_SendString(char *str);
 
-void USART1_SendData(char Data)
+void USART1_SendData(const char data)
 {
   /* Transmit Data */
   	//UART_HandleTypeDef tuart1  
-	//while(!__HAL_UART_GET_FLAG(huart1,USART_FLAG_TC));
-	//USART1->DR = (Data & (uint16_t)0x01FF);
+	while(!(USART1->SR & UART_FLAG_TC) );
+	USART1->DR = (data & (uint16_t)0x01FF);
 }
 
 void USART1_SendString(char *str)
@@ -33,7 +33,7 @@ void TxPrintf(const char *Form, ... )
     va_start(ArgPtr,Form);	 
     vsprintf(Buff, Form, ArgPtr);
     va_end(ArgPtr);
-    UART4_SendString(Buff);
+    USART1_SendString(Buff);
 }
 
 static void UART4_SendData(const char data)

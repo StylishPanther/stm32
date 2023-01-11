@@ -30,6 +30,8 @@
 
 __VARIABLE_EXT__ Uint16 g_int32_vcount;
 __VARIABLE_EXT__ Uint16 g_int32_hcount;
+__VARIABLE_EXT__ int32 g_int32_sen_cnt;
+
 __VARIABLE_EXT__ Uint16 flag;
 
 __VARIABLE_EXT__ int32 test;

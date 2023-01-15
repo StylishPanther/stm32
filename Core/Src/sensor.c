@@ -106,6 +106,7 @@ interrupt void Sensor_Value(void)
 }
 */
 
+/*
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim->Instance == TIM4)
@@ -131,7 +132,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		
 	}
 }
-
+*/
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {

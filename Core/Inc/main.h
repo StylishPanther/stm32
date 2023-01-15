@@ -143,6 +143,7 @@ void Error_Handler(void);
 #define Motor_Timer_B_GPIO_Port GPIOB
 #define SEN_8_16_Pin GPIO_PIN_0
 #define SEN_8_16_GPIO_Port GPIOE
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

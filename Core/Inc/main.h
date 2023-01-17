@@ -133,8 +133,6 @@ void Error_Handler(void);
 #define VFD_CE_GPIO_Port GPIOD
 #define VFD_CLK_Pin GPIO_PIN_3
 #define VFD_CLK_GPIO_Port GPIOD
-#define Left_Motor_Pin GPIO_PIN_4
-#define Left_Motor_GPIO_Port GPIOB
 #define Right_Motor_Pin GPIO_PIN_5
 #define Right_Motor_GPIO_Port GPIOB
 #define Motor_Timer_A_Pin GPIO_PIN_6

@@ -1,24 +1,24 @@
 #include "device.h"
 #include "sensor.h"
 
-#define ADC_SET_SQR1(adc) (ADC_SQR1_RK(adc, 16)|\
-							ADC_SQR1_RK(adc, 15) |\
-							ADC_SQR1_RK(adc, 14) |\
-							ADC_SQR1_RK(adc, 13) 
+#define ADC_SET_SQR1(_ADCNB_) 										(ADC_SQR1_RK(_ADCNB_, 16)|\
+																	ADC_SQR1_RK(_ADCNB_, 15) |\
+																	ADC_SQR1_RK(_ADCNB_, 14) |\
+																	ADC_SQR1_RK(_ADCNB_, 13) )
 
-#define ADC_SET_SQR2(adc) (ADC_SQR2_RK(adc, 12)|\
-							ADC_SQR2_RK(adc, 11) |\
-							ADC_SQR2_RK(adc, 10) |\
-							ADC_SQR2_RK(adc, 9) |\
-							ADC_SQR2_RK(adc, 8) |\
-							ADC_SQR2_RK(adc, 7))
+#define ADC_SET_SQR2(_ADCNB1_, _ADCNB2_) 											(ADC_SQR2_RK(_ADCNB1_, 12)|\
+																					ADC_SQR2_RK(_ADCNB1_, 11) |\
+																					ADC_SQR2_RK(_ADCNB1_, 10) |\
+																					ADC_SQR2_RK(_ADCNB1_, 9) |\
+																					ADC_SQR2_RK(_ADCNB2_, 8) |\
+																					ADC_SQR2_RK(_ADCNB2_, 7))
 							
-#define ADC_SET_SQR3(adc) (ADC_SQR3_RK(adc, 6)|\
-								ADC_SQR3_RK(adc, 5) |\
-								ADC_SQR3_RK(adc, 4) |\
-								ADC_SQR3_RK(adc, 3) |\
-								ADC_SQR3_RK(adc, 2) |\
-								ADC_SQR3_RK(adc, 1))
+#define ADC_SET_SQR3(_ADCNB_) 		(ADC_SQR3_RK(_ADCNB_, 6)|\
+									ADC_SQR3_RK(_ADCNB_, 5) |\
+									ADC_SQR3_RK(_ADCNB_, 4) |\
+									ADC_SQR3_RK(_ADCNB_, 3) |\
+									ADC_SQR3_RK(_ADCNB_, 2) |\
+									ADC_SQR3_RK(_ADCNB_, 1))
 
 #if 1
 #define ADC_1	0x0
@@ -39,6 +39,8 @@
 #define ADC_16	0xf
 #endif
 
+#define SEN_ON 	0x1L
+#define SEN_OFF	0x10000L
 //PD08 ~ PD15
 
 typedef volatile enum
@@ -67,6 +69,12 @@ typedef volatile enum
 volatile Uint16 sen_shoot_arr[ SEN_END ] = 
 {
 	SEN0, SEN1, SEN2, SEN3, SEN4, SEN5, SEN6, SEN7
+};
+
+volatile Uint16 sen_adc_seq[ ADC_NUM ] = 
+{
+	ADC_1 , ADC_2 ,  ADC_3 ,   ADC_4 ,   ADC_5 ,   ADC_6 ,   ADC_7 ,  ADC_8,
+	ADC_9 , ADC_10 ,  ADC_11,  ADC_12 ,  ADC_13 ,  ADC_14 ,  ADC_15,  ADC_16
 };
 
 /*
@@ -134,11 +142,40 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 */
 
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if(htim->Instance == TIM4)
+	{
+		//TxPrintf("tim9 250us \n");
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_15);
+		
+		GPIOD->BSRR = ( SEN_ON << sen_shoot_arr[ g_int32_sen_cnt ] );
+		//OFF_L = 0x10000
+		ADC1->SQR1 = ADC_SET_SQR1(sen_adc_seq[g_int32_sen_cnt]); // 16 , 15, 14, 13
+		ADC1->SQR2 = ADC_SET_SQR2(sen_adc_seq[g_int32_sen_cnt], sen_adc_seq[g_int32_sen_cnt + SEN_END]); // 12, 11, 10, 9, 8, 7
+		ADC1->SQR3 = ADC_SET_SQR3(sen_adc_seq[g_int32_sen_cnt + SEN_END]);								 // 6, 5, 4, 3, 2, 1
+
+		HAL_ADC_Start_DMA(&hadc1, g_sen, 16);
+	}
+}
+
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
 	if(hadc->Instance == ADC1)
 	{
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15,GPIO_PIN_RESET);
+		GPIOD->BSRR = ( SEN_OFF << sen_shoot_arr[ g_int32_sen_cnt ] );
+		HAL_ADC_Stop_DMA(&hadc1);
+		// value 값 후처리
+		// max_min value 
+		TxPrintf("CONV_CPLT");
+		g_int32_sen_cnt++;
+		
+		if(g_int32_sen_cnt >= SEN_END) 
+		{
+			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_4);
+			g_int32_sen_cnt = 0;
+		}
+
+		
 	}
 }
-

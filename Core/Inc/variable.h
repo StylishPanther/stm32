@@ -36,4 +36,6 @@ __VARIABLE_EXT__ Uint16 flag;
 
 __VARIABLE_EXT__ int32 test;
 
+__VARIABLE_EXT__ Uint32 g_sen[16];
+
 		

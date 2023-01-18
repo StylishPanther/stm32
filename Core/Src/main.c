@@ -125,9 +125,8 @@ int main(void)
   while (1)
   {
   	test++;
-    //HAL_ADC_Start_IT(&hadc1);
-	//System_Information();
-    //TxPrintf("%d\n", test);
+
+	//Check 2. 4095가 같은 곳에서 나오는지 확인 
     for(int i = 0; i < 16; i++)
 	{
 		TxPrintf("[%u] ", g_sen[i]);

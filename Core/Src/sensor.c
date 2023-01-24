@@ -144,26 +144,31 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
+	volatile int32 idx = 0;
 	if(htim->Instance == TIM4)
 	{
 		//TxPrintf("tim9 250us \n");
 		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_15);
+		
+		for(idx = 0; idx < SEN_END; idx++)
+		{
+			
+			// 발광 센서 키는 부분. 현재는 의미 없음
+			GPIOD->BSRR = ( SEN_ON << sen_shoot_arr[ g_int32_sen_cnt ] );
+			//OFF_L = 0x10000
+			// ADC Channel 의 Rank 설정 . 
+			// 이렇게 설정하면 현재 g_int32_sen_cnt가 증가하면서 
+			// 0000 0000 8888 8888
+			// 1111 1111 9999 9999
+			//...
+			// 트레이서랑 동일한데 4번 4번 4번 4번이 아니라 8번 8번 한다고 보면 된다.
+			ADC1->SQR1 = ADC_SET_SQR1(sen_adc_seq[g_int32_sen_cnt]); // 16 , 15, 14, 13
+			ADC1->SQR2 = ADC_SET_SQR2(sen_adc_seq[g_int32_sen_cnt], sen_adc_seq[g_int32_sen_cnt + SEN_END]); // 12, 11, 10, 9, 8, 7
+			ADC1->SQR3 = ADC_SET_SQR3(sen_adc_seq[g_int32_sen_cnt + SEN_END]);								 // 6, 5, 4, 3, 2, 1
 
-		// 발광 센서 키는 부분. 현재는 의미 없음
-		GPIOD->BSRR = ( SEN_ON << sen_shoot_arr[ g_int32_sen_cnt ] );
-		//OFF_L = 0x10000
-		// ADC Channel 의 Rank 설정 . 
-		// 이렇게 설정하면 현재 g_int32_sen_cnt가 증가하면서 
-		// 0000 0000 8888 8888
-		// 1111 1111 9999 9999
-		//...
-		// 트레이서랑 동일한데 4번 4번 4번이 아니라 8번 8번 한다고 보면 된다.
-		ADC1->SQR1 = ADC_SET_SQR1(sen_adc_seq[g_int32_sen_cnt]); // 16 , 15, 14, 13
-		ADC1->SQR2 = ADC_SET_SQR2(sen_adc_seq[g_int32_sen_cnt], sen_adc_seq[g_int32_sen_cnt + SEN_END]); // 12, 11, 10, 9, 8, 7
-		ADC1->SQR3 = ADC_SET_SQR3(sen_adc_seq[g_int32_sen_cnt + SEN_END]);								 // 6, 5, 4, 3, 2, 1
-
-		// 변환 시작
-		HAL_ADC_Start_DMA(&hadc1, g_sen, 16);
+			// 변환 시작
+			HAL_ADC_Start_DMA(&hadc1, g_sen, 16);
+		}
 	}
 }
 
@@ -173,16 +178,18 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
 	if(hadc->Instance == ADC1)
 	{
+		//HAL_ADC_Stop_DMA(&hadc1);
 		// Check 1. 이 함수가 250us 마다 호출되는지 확인해봐야 함
 		GPIOD->BSRR = ( SEN_OFF << sen_shoot_arr[ g_int32_sen_cnt ] );
 		//HAL_ADC_Stop_DMA(&hadc1);
 		// value 값 후처리
 		// max_min value 
-		TxPrintf("CONV_CPLT\n");
+		
 		g_int32_sen_cnt++;
 		
 		if(g_int32_sen_cnt >= SEN_END) 
 		{
+			TxPrintf("SEQ_CPLT\n");
 			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_4);	
 			g_int32_sen_cnt = 0;
 		}

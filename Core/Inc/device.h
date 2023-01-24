@@ -10,12 +10,12 @@
 typedef unsigned char   BOOL;
 typedef unsigned char   BYTE;
 
-typedef int             int16;
-typedef long            int32;
-typedef unsigned int    UINT16;
-typedef unsigned long   uint32;
-typedef unsigned int    Uint16;
-typedef unsigned long   Uint32;
+typedef short			int16;
+typedef int             int32;
+typedef unsigned short  UINT16;
+typedef unsigned short  Uint16;
+typedef unsigned int    uint32;
+typedef unsigned int    Uint32;
 typedef float           float32;
 typedef long double     float64;
 

@@ -167,6 +167,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 }
 
+
+
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
 	if(hadc->Instance == ADC1)
@@ -176,12 +178,12 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 		//HAL_ADC_Stop_DMA(&hadc1);
 		// value 값 후처리
 		// max_min value 
-		TxPrintf("CONV_CPLT");
+		TxPrintf("CONV_CPLT\n");
 		g_int32_sen_cnt++;
 		
 		if(g_int32_sen_cnt >= SEN_END) 
 		{
-			//HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_4);
+			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_4);	
 			g_int32_sen_cnt = 0;
 		}
 
